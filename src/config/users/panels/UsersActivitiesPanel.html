@@ -1,0 +1,27 @@
+<div ng-repeat="activity in $ctrl.activities track by $index" class="pip-activities" ng-if="$ctrl.state == 'data'">
+
+	<div class="pip-ref-item lp16 rp16">
+		<md-icon class="rm24" md-svg-icon="icons:{{activity.icon}}"></md-icon>
+		<div class="pip-content flex">
+			<p class="pip-title">{{activity.activityString}}</p>
+			<p class="pip-subtitle">{{ activity.time | date : 'medium' }}</p>
+		</div>
+	</div>
+	<div class="bottom-divider" ng-show="$index < $ctrl.activities.length - 1"></div>
+</div>
+<div class="layout-column layout-align-center-center flex bb-empty w-stretch" ng-if="$ctrl.state != 'data'">
+	<div class="pip-empty" ng-if="$ctrl.state == 'empty' && !$ctrl.isPreLoading">
+		<img src="images/empty/empty.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'USER_ACTIVITES_EMPTY' | translate}}
+		</div>
+	</div>
+
+	<div class="pip-empty" ng-if="$ctrl.state == 'progress' || $ctrl.isPreLoading">
+		<img src="images/empty/progress.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'LOADING_PROGRESS_USER_ACTIVITES' | translate}}
+			<md-progress-linear md-mode="indeterminate" class="tm24"></md-progress-linear>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+iqs-settings-system-objects-panel {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+    .pip-main-menu {
+        height: 100%;
+    }
+    .iqs-list-item {
+        width: 100%;
+    }
+    .iqs-before:before {
+        min-height: 0 !important;
+    }
+    .pip-main-menu>.pip-menu .pip-list-container {
+        height: calc(100% - 56px) !important;
+        overflow-x: hidden;
+    }
+}

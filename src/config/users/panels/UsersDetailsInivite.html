@@ -1,0 +1,143 @@
+<pip-document class="pip-scroll ">
+	<md-progress-linear md-mode="indeterminate" style="position: absolute;" ng-show="$ctrl.transaction.busy()">
+	</md-progress-linear>
+
+	<div class="pip-body p0 tp16 h-stretch" ng-if="$ctrl.users[$ctrl.selectedIndex].action == 'approve'">
+		<h2 class="lp16 rp16 tm0">
+			{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_TITLE_RESPONSE' | translate}}
+		</h2>
+		<div class="pip-ref-item layout-row layout-align-start-center lp16 rp16">
+			<pip-avatar pip-id="$ctrl.users[$ctrl.selectedIndex].invitee_id" pip-rebind="true" pip-name="$ctrl.users[$ctrl.selectedIndex].invitee_name"
+			            class="pip-face-md rm16">
+			</pip-avatar>
+			<div class="pip-content">
+				<p class="pip-title text-subhead">
+					{{$ctrl.users[$ctrl.selectedIndex].invitee_name}}
+				</p>
+				<p class="pip-subtitle">
+					{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_RESPONSE_FROM' | translate}}
+					{{ $ctrl.users[$ctrl.selectedIndex].sent_time | formatLongDate}}
+				</p>
+			</div>
+		</div>
+
+		<div class="pip-ref-list lp16 rp16 flex w-stretch">
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].invitee_email">
+				<md-icon md-svg-icon="icons:message" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{$ctrl.users[$ctrl.selectedIndex].invitee_email}}
+					</div>
+					<div class="pip-subtitle">
+						{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_EMAIL' | translate}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lp16 rp16 tp8 bp16 color-secondary-text">
+			{{::'SETTING_SYSTEM_ACCOUNTS_ROLE' | translate}}
+		</div>
+
+		<md-radio-group ng-model="$ctrl.users[$ctrl.selectedIndex].role" class="md-primary lp16 rp16" style="display: block">
+			<md-radio-button ng-repeat="d in $ctrl.roleItems track by $index" ng-value="d.title" xxxng-if="$ctrl.accessConfig.changeUserRole"
+			                 ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.changeUserRole">
+				{{ d.title | translate }}<br />
+				<span class="ipsum color-secondary-text">
+					{{ d.subtitle | translate }}
+				</span>
+			</md-radio-button>
+		</md-radio-group>
+	</div>
+
+	<div class="pip-body p0 tp16 h-stretch" ng-if="$ctrl.users[$ctrl.selectedIndex].action != 'approve'">
+		<h2 class="tm0 lp16 rp16">
+			{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_TITLE' | translate}}</h2>
+		<div class="pip-ref-list lp16 rp16 flex w-stretch">
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].invitee_email">
+				<md-icon md-svg-icon="icons:message" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{$ctrl.users[$ctrl.selectedIndex].invitee_email}}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_EMAIL' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].create_time">
+				<md-icon md-svg-icon="icons:date" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.users[$ctrl.selectedIndex].sent_time | date : 'medium' }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_TIME' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].role">
+				<md-icon md-svg-icon="icons:shield" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.users[$ctrl.selectedIndex].role | translate }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'SETTING_SYSTEM_ACCOUNTS_ROLE' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center pip-ref-list-item tm8">
+				<md-icon md-svg-icon="icons:key" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.users[$ctrl.selectedIndex].id }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'USER_ID' | translate}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="pip-footer" style="height: 86px" ng-if="$ctrl.users[$ctrl.selectedIndex].action != 'approve'">
+		<div class="pip-action-list w-stretch">
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.addUser" ng-click="$ctrl.resendInvite($ctrl.selectedIndex)"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:send"></md-icon>
+				<div class="pip-title">{{::'RESEND' | translate}}</div>
+			</md-button>
+
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.deleteUser" ng-click="$ctrl.deleteInvite($ctrl.users[$ctrl.selectedIndex].id)"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.deleteUser">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:trash"></md-icon>
+				<div class="pip-title">{{::'DELETE' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+
+	<div class="pip-footer" style="height: 86px" ng-if="$ctrl.users[$ctrl.selectedIndex].action == 'approve'">
+		<div class="pip-action-list w-stretch">
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.addUser" ng-disabled="!$ctrl.users[$ctrl.selectedIndex].role || $ctrl.transaction.busy() || !$ctrl.accessConfig.addUser"
+			           ng-click="$ctrl.activateInvite($ctrl.selectedIndex)">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:check"></md-icon>
+				<div class="pip-title">{{::'ACTIVATE' | translate}}</div>
+			</md-button>
+
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.addUser" ng-click="$ctrl.denyInvite($ctrl.users[$ctrl.selectedIndex].id)"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+				<md-icon class="pip-pic" md-svg-icon="icons:cross"></md-icon>
+
+				<div class="pip-title">{{::'REFUSE' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+</pip-document>

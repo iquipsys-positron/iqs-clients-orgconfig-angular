@@ -1,0 +1,89 @@
+<pip-document class="pip-scroll ">
+	<md-progress-linear md-mode="indeterminate" style="position: absolute;" ng-show="$ctrl.transaction.busy()">
+	</md-progress-linear>
+	<div ng-show="$ctrl.error" class="pip-page-errors">
+		<span class="pip-error-text color-error flex"> {{$ctrl.error | translate}}</span>
+		<md-icon md-svg-icon="icons:warn-circle" class="color-error"></md-icon>
+	</div>
+	<div class="pip-body">
+
+		<form name="form" novalidate>
+			<div class="pip-ref-list tm16" ng-if="$ctrl.edit == 'data'">
+				<div class="layout-row layout-align-start-center pip-ref-list-item tm8">
+					<md-icon md-svg-icon="icons:key" class="iqs-icon lm0 rm16"></md-icon>
+					<div class="pip-content tp8 bp8">
+						<div class="text-subhead1">
+							{{ $ctrl.object.id }}
+						</div>
+						<div class="pip-subtitle color-secondary-text">
+							{{::'SHIFT_ID' | translate}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<md-input-container class="md-block flex" ng-if="$ctrl.edit == 'data'" ng-disabled="$ctrl.transaction.busy()">
+				<label>{{::'SHIFT_NAME' | translate}}</label>
+				<input iqs-test-name ng-model="$ctrl.object.name" disabled>
+			</md-input-container>
+
+			<md-input-container class="md-block flex" ng-if="$ctrl.edit != 'data'">
+				<label>{{::'SHIFT_NAME' | translate}}</label>
+				<input iqs-test-name ng-model="$ctrl.object.name" required name="name" iqs-unique-validator iqs-unique-collection="$ctrl.nameCollection"
+				       ng-disabled="$ctrl.transaction.busy()">
+				<div ng-messages="$ctrl.touchedErrorsWithHint($ctrl.form, $ctrl.form.name)">
+					<div ng-message="required">
+						{{::'SHIFT_FILL_NAME' | translate}}
+					</div>
+					<div ng-message="uniqueValidate">
+						{{ 'SHIFT_FILL_NAME_UNIQUE_ERROR' | translate }}
+					</div>
+				</div>
+			</md-input-container>
+
+			<pip-time-autocomplete iqs-test-shift-start pip-time-label="'SHIFT_START'" pip-change-callback="$ctrl.onDateChange"
+			                       ng-disabled="$ctrl.edit == 'data' || $ctrl.transaction.busy()" pip-date-time="$ctrl.dateStart"
+			                       pip-time-step="$ctrl.timeStep" iqs-test="$ctrl.dateStart">
+			</pip-time-autocomplete>
+
+			<pip-time-autocomplete iqs-test-shift-end pip-time-label="'SHIFT_END'" pip-change-callback="$ctrl.onDateChangeEnd"
+			                       ng-disabled="$ctrl.edit == 'data' || $ctrl.transaction.busy()" pip-date-time="$ctrl.dateEnd"
+			                       pip-time-step="$ctrl.timeStep">
+			</pip-time-autocomplete>
+
+			<div class="iqs-shift-placeholder color-secondary-text" ng-if="$ctrl.dateEnd < $ctrl.dateStart">
+				{{::'SHIFTS_PLACEHOLDER' | translate}}
+			</div>
+		</form>
+
+	</div>
+
+	<div class="pip-footer " style="height: 86px">
+		<div class="pip-action-list w-stretch">
+			<md-button iqs-test-save class="pip-action-list-item" ng-click="$ctrl.saveClick()" ng-disabled="!$ctrl.object.name && $ctrl.transaction.busy() || !$ctrl.accessConfig.addShift"
+			           ng-if="$ctrl.edit != 'data'">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:check"></md-icon>
+				<div class="pip-title">{{::'SAVE' | translate }}</div>
+			</md-button>
+			<md-button iqs-test-edit class="pip-action-list-item" ng-click="$ctrl.editClick()" ng-if="$ctrl.edit == 'data'"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addShift">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:pen"></md-icon>
+				<div class="pip-title">{{::'EDIT' | translate }}</div>
+			</md-button>
+			<md-button iqs-test-cancel class="pip-action-list-item" ng-click="$ctrl.cancelClick()" ng-if="$ctrl.edit != 'data'"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addShift">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:cross"></md-icon>
+				<div class="pip-title">{{::'CANCEL' | translate}}</div>
+			</md-button>
+
+			<md-button iqs-test-delete class="pip-action-list-item" ng-click="$ctrl.deleteClick()" ng-if="$ctrl.edit == 'data'"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.deleteShift">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:trash"></md-icon>
+				<div class="pip-title">{{::'DELETE' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+</pip-document>

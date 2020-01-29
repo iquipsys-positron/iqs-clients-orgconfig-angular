@@ -1,0 +1,46 @@
+@import './location/GlobalSettingsLocationPanel';
+.iqs-config-small-list {
+    max-width: calc(100% - 21px) !important;
+    min-height: 64px;
+}
+
+iqs-global-settings-map-panel {
+    .iqs-map-edit-zoom-buttons {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+    }
+    .iqs-map-edit-overlay-buttons {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+    }
+    .iqs-map-edit-clear-buttons {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+    }
+    .iqs-map-edit-center-buttons {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+    }
+    .pip-footer {
+        .pip-files {
+            .pip-progress-body {
+                padding: 0px !important;
+            }
+        }
+    }
+}
+
+.xs,
+.sm {
+    iqs-global-settings-map-panel {
+        .pip-collage {
+            .pip-collage-section {
+                height: 250px;
+            }
+        }
+    }
+}

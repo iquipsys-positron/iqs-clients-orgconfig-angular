@@ -1,0 +1,18 @@
+<iqs-statistics-filter-panel iqs-start-date="$ctrl.startDate" iqs-date-period-type="$ctrl.dateType"
+                             iqs-filter-visibility="$ctrl.filterVisibility" iqs-statistics-refresh="$ctrl.updateStatistics(params)"
+                             iqs-filter-values="$ctrl.filterValues">
+</iqs-statistics-filter-panel>
+<div class="pip-body layout-column layout-align-center-center flex ">
+    <div class="pip-empty" ng-if="$ctrl.state == 'progress' || $ctrl.isPreLoading">
+        <img src="images/empty/progress.svg" class="pip-pic">
+        <div class="pip-text">
+            {{ ::'STATISTICS_LOADING_TITLE' | translate }}
+            <md-progress-linear md-mode="indeterminate" class="tm24"></md-progress-linear>
+        </div>
+    </div>
+
+    <div ng-if="$ctrl.state == 'data' && !$ctrl.isPreLoading" class="flex w-stretch h-stretch">
+        <div ng-include="'config/usage_statistics/includes/StatisticsBySpecificParam.html'">
+        </div>
+    </div>
+</div>

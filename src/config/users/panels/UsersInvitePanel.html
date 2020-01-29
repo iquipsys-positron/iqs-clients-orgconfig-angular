@@ -1,0 +1,68 @@
+<pip-document class="pip-scroll ">
+	<md-progress-linear md-mode="indeterminate" style="position: absolute;" ng-show="$ctrl.transaction.busy()"></md-progress-linear>
+	<div class="pip-body lp16 rp16">
+		<h2 class="tm0 ">
+			{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_TITLE' | translate}}
+		</h2>
+
+		<div class="layout-row layout-align-center-center">
+			<md-icon md-svg-icon="iqs:person" class="flex-fixed rm16 lm0" ng-if="$ctrl.account.id"></md-icon>
+			<md-icon md-svg-icon="icons:message" class="flex-fixed rm16 lm0" ng-if="!$ctrl.account.id"></md-icon>
+
+			<md-autocomplete class="flex" md-input-name="account" md-selected-item="$ctrl.account" md-search-text="$ctrl.searchText"
+			                 md-items="item in $ctrl.querySearch($ctrl.searchText)" md-selected-item-change="$ctrl.onItemChange()"
+			                 pip-input-blur="$ctrl.onItemChange()" md-item-text="$ctrl.getItemText(item)" ng-keydown="$ctrl.onKeyDown($event)"
+			                 md-no-cache="true" md-clear-button="true" md-delay="400" md-floating-label="{{::'ORGANIZATIONS_CREATE_INVITE_PEOPLE_PLACEHOLDER' | translate}}">
+				<md-item-template>
+					<span ng-if="item.name && item.login">
+						{{ item.name + ' (' + item.login + ')' }}
+					</span>
+					<span ng-if="!(item.name && item.login)">
+						{{ item.name || item.login }}
+					</span>
+				</md-item-template>
+
+				<div ng-messages="!$ctrl.getPeopleValidate()" role="alert">
+					<div ng-if="!$ctrl.getPeopleEmailValidate()">{{ 'ACCOUNTT_EMAIL_VALIDATE_ERROR' | translate }}</div>
+					<div ng-if="!$ctrl.getPeopleUniqueValidate()">{{ 'INVITE_IS_FOUND' | translate }}</div>
+				</div>
+			</md-autocomplete>
+
+			<!-- <md-input-container class="bm0 flex">
+				<input type="email" ng-model="$ctrl.account.login" ng-change="$ctrl.changePerson()" 
+					placeholder="{{::'EMAIL' | translate}}" ng-disabled="$ctrl.transaction.busy()"/>
+			</md-input-container> -->
+		</div>
+
+		<div class="layout-row layout-align-center-center">
+			<md-icon md-svg-icon="icons:shield" class="flex-fixed rm16 bm32 lm0"></md-icon>
+			<md-input-container class="bm0 flex">
+				<label>{{::'SETTING_SYSTEM_ACCOUNTS_ROLE' | translate}}</label>
+				<md-select ng-model="$ctrl.role" ng-disabled="$ctrl.transaction.busy()">
+					<md-option ng-repeat="state in $ctrl.roleItems track by $index" ng-value="state.title">
+						{{:: state.title | translate}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+	</div>
+
+	<div class="pip-footer " style="height: 86px">
+		<div class="pip-action-list w-stretch">
+			<md-button class="pip-action-list-item" ng-click="$ctrl.saveClick()" ng-if="!$ctrl.account || !$ctrl.account.id"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.getPeopleValidate() || !$ctrl.searchText">
+				<md-icon class="pip-pic" md-svg-icon="icons:send"></md-icon>
+				<div class="pip-title">{{::'SETTING_SYSTEM_ACCOUNTS_SEND' | translate }}</div>
+			</md-button>
+			<md-button class="pip-action-list-item" ng-click="$ctrl.saveClick()" ng-if="$ctrl.account && $ctrl.account.id"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.getPeopleValidate() || !$ctrl.searchText">
+				<md-icon class="pip-pic" md-svg-icon="icons:check"></md-icon>
+				<div class="pip-title">{{::'SETTING_SYSTEM_ACCOUNTS_ADD' | translate }}</div>
+			</md-button>
+			<md-button class="pip-action-list-item" ng-click="$ctrl.cancelClick()" ng-disabled="$ctrl.transaction.busy()">
+				<md-icon class="pip-pic" md-svg-icon="icons:cross"></md-icon>
+				<div class="pip-title">{{::'CANCEL' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+</pip-document>

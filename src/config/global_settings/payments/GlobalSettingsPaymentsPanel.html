@@ -1,0 +1,13 @@
+<div class="tp24 bp24 iqs-setting-payment">
+    <md-progress-linear ng-show="$ctrl.transaction.busy()" md-mode="indeterminate" class="pip-progress-top">
+    </md-progress-linear>
+
+    <div class="iqs-setting-payment-container layout-column w-stretch pointer">
+        <iqs-credit-card-panel iqs-save="$ctrl.onSaveCreditCard(card)" iqs-init="$ctrl.creditCardPanelInit($API)"
+                               iqs-item="$ctrl.card" ng-disabled="$ctrl.transaction.busy()"></iqs-credit-card-panel>
+
+        <md-button class="md-button md-raised tm24 lm0 bm16 rm0 lm0" ng-click="$ctrl.savePayment()" ng-disabled="$ctrl.transaction.busy()">
+            {{:: 'GLOBAL_SETTINGS_PAYMENTS_SAVE' | translate}}
+        </md-button>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.iqs-shift-panel {
+    .pip-ref-list .pip-ref-list-item {
+        max-width: calc(100% - 21px);
+    }
+    .iqs-shift-placeholder {
+        margin-top: -40px;
+    }
+    .iqs-empty-item {
+        height: 68px;
+    }
+    .pip-content-container {
+        background-color: #fafafa !important;
+    }
+}

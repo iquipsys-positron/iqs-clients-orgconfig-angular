@@ -1,0 +1,10 @@
+<iqs-shift-edit-panel ng-if="($ctrl.edit == 'edit' || $ctrl.edit == 'data') && $ctrl.state() == 'data' && !$ctrl.isPreLoading"
+                                      iqs-edit="$ctrl.edit" iqs-shift="$ctrl.collection[$ctrl.selectedIndex()]"
+                                      iqs-details="$ctrl.details">
+</iqs-shift-edit-panel>
+<iqs-shift-edit-panel ng-if="$ctrl.edit == 'add' && $ctrl.accessConfig.addShift && !$ctrl.isPreLoading" iqs-edit="$ctrl.edit"
+                                      iqs-details="$ctrl.details">
+</iqs-shift-edit-panel>
+
+<pip-document ng-if="$ctrl.state() != 'data' && $ctrl.edit != 'add' || $ctrl.isPreLoading" ng-include="'config/shifts/panels/ShiftsEmpty.html'">
+</pip-document>

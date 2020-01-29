@@ -1,0 +1,65 @@
+<div class="tp24 bp24">
+	<form name="orgForm">
+		<div class="layout-row layout-align-center-center">
+			<pip-avatar-edit pip-id="$ctrl.site.id" pip-created="$ctrl.onPictureCreated($event)" pip-changed="$ctrl.onPictureChanged($event)"
+			                 pip-default-text="'GLOBAL_SETTINGS_CHANGE_AVATAR'" pip-reset="$ctrl.isReseting()" ng-disabled="$ctrl.transaction.busy()"
+			                 pip-rebind="true">
+			</pip-avatar-edit>
+		</div>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_ORG_SHORT_NAME' | translate}}</label>
+			<input ng-model="$ctrl.site.name" required type="text" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_ORG_FULL_NAME' | translate}}</label>
+			<input ng-model="$ctrl.site.description" type="text" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_ORG_ADDRESS' | translate}}</label>
+			<textarea ng-model="$ctrl.site.address" type="text" ng-disabled="$ctrl.transaction.busy()">
+			</textarea>
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_ORG_CODE' | translate}}</label>
+			<input ng-model="$ctrl.code" type="text" ng-disabled="$ctrl.transaction.busy()" ng-change="$ctrl.onCodeChange()">
+			<div class="hint" ng-if="!$ctrl.error">{{::'GLOBAL_SETTINGS_ORG_CODE_HINT' | translate}}</div>
+			<div class="color-error hint" ng-if="$ctrl.error">
+				{{ $ctrl.error | translate}}
+			</div>
+		</md-input-container>
+
+		<md-button class="md-button md-raised tm24 lm0 bm16 rm0 lm0" ng-click="$ctrl.randomName()" ng-disabled="$ctrl.transaction.busy()">
+			{{:: 'GLOBAL_SETTINGS_ORG_CODE_RANDOM' | translate}}
+		</md-button>
+
+		<md-input-container class="md-block flex bm24">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_INDUSTRY'| translate}}</label>
+			<md-select ng-model="$ctrl.site.industry" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="type in $ctrl.industryCollection track by $index" ng-value="type.id">
+					{{::type.title | translate}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm24">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_ORG_SIZE'| translate}}</label>
+			<md-select ng-model="$ctrl.site.org_size" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="type in $ctrl.orgCollection track by $index" ng-value="type.id">
+					{{::type.title | translate}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm24">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TOTAL_SIZE'| translate}}</label>
+			<md-select ng-model="$ctrl.site.total_sites" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="type in $ctrl.totalCollection track by $index" ng-value="type.id">
+					{{::type.title | translate}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+	</form>
+</div>

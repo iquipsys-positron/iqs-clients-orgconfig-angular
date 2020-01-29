@@ -1,0 +1,22 @@
+<div class="layout-column layout-align-center-center flex bb-empty">
+	<div class="pip-empty" ng-if="$ctrl.state() == 'empty' && !$ctrl.isPreLoading">
+		<img src="images/empty/empty.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'USERS_EMPTY'| translate}}
+		</div>
+		<div class="pip-actions layout-row layout-align-end-center">
+			<md-button class="color-accent-bg tm12 flex" aria-label="DOWNLOAD" xxxng-if="$ctrl.accessConfig.addUser" ng-click="$ctrl.addClick()"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+				{{:: 'ADD_USER' | translate}}
+			</md-button>
+		</div>
+	</div>
+
+	<div class="pip-empty" ng-if="$ctrl.state() == 'progress' || $ctrl.isPreLoading">
+		<img src="images/empty/progress.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'LOADING_ACCOUNTS' | translate }}
+			<md-progress-linear md-mode="indeterminate" class="tm24"></md-progress-linear>
+		</div>
+	</div>
+</div>

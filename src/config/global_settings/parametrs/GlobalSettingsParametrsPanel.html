@@ -1,0 +1,55 @@
+<div class="tp24 bp24">
+	<form name="paramForm">
+		<div class="pip-ref-list tm16">
+			<div class="layout-row layout-align-start-center pip-ref-list-item tm8">
+				<md-icon md-svg-icon="icons:key" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.site.id }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'ORGANIZATION_ID' | translate}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<md-input-container class="md-block flex bm24">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_MAIN_POINT' | translate}}</label>
+			<md-select ng-model="$ctrl.site.purpose" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="type in $ctrl.purpouseCollection track by $index" ng-value="type.id">
+					{{::type.title | translate}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TIME_ACTIVE' | translate}}</label>
+			<input ng-model="$ctrl.site.active_int" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TIME_INACTIVE' | translate}}</label>
+			<input ng-model="$ctrl.site.inactive_int" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TIME_OUTSIDE' | translate}}</label>
+			<input ng-model="$ctrl.site.offsite_int" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm0">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TIME_DELAY' | translate}}</label>
+			<input ng-model="$ctrl.site.offline_timeout" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex bm24">
+			<label>{{::'GLOBAL_SETTINGS_PARAMETERS_TIME' | translate}}</label>
+			<md-select ng-model="$ctrl.site.data_rate" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="type in $ctrl.dataRateValues track by $index" ng-value="type">
+					{{::type | translate}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+	</form>
+</div>

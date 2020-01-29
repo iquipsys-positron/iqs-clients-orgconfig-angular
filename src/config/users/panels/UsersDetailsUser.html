@@ -1,0 +1,102 @@
+<pip-document class="pip-scroll ">
+	<md-progress-linear md-mode="indeterminate" style="position: absolute;" ng-show="$ctrl.transaction.busy() && $ctrl.state() != 'progress'">
+	</md-progress-linear>
+	<div class="pip-header bp0 rp16 lp16 tp8" ng-if="$ctrl.state() == 'data' && !$ctrl.isPreLoading">
+		<div style="width: 100%">
+			<div class="pip-ref-item">
+				<pip-avatar pip-id="$ctrl.users[$ctrl.selectedIndex].id" pip-rebind="true" pip-name="$ctrl.users[$ctrl.selectedIndex].name"
+				            class="pip-face rm16">
+				</pip-avatar>
+				<div class="pip-content">
+					<p class="pip-title">{{$ctrl.users[$ctrl.selectedIndex].name}}</p>
+					<p class="pip-subtitle">
+						{{::'SETTINGS_BASIC_INFO_FROM' | translate}} {{ $ctrl.users[$ctrl.selectedIndex].create_time | formatLongDate }}
+					</p>
+				</div>
+			</div>
+			<md-tabs md-dynamic-height md-selected="$ctrl.section" ng-if="$ctrl.users[$ctrl.selectedIndex].id == $ctrl.ownerUserId">
+				<md-tab label="{{section.title | translate}}" id="{{section.id}}" ng-repeat="section in $ctrl.sections track by $index"
+				        ng-click="$ctrl.selectSection(section.id)">
+				</md-tab>
+			</md-tabs>
+
+		</div>
+	</div>
+	<div class="pip-body p0 tp16 h-stretch" ng-if="$ctrl.state() == 'data' && !$ctrl.isPreLoading">
+		<div ng-if="$ctrl.section == 0" class="pip-ref-list lp16 rp16 flex w-stretch">
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].about">
+				<md-icon md-svg-icon="webui-icons:tag" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{$ctrl.users[$ctrl.selectedIndex].about}}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'SETTING_SYSTEM_ACCOUNTS_ABOUT' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8">
+				<md-icon md-svg-icon="icons:message" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.users[$ctrl.selectedIndex].login }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'EMAIL' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.users[$ctrl.selectedIndex].localRole">
+				<md-icon md-svg-icon="icons:shield" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{$ctrl.users[$ctrl.selectedIndex].localRole | translate}}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'SETTING_SYSTEM_ACCOUNTS_ROLE' | translate}}
+					</div>
+				</div>
+			</div>
+
+			<div class="layout-row layout-align-start-center pip-ref-list-item tm8">
+				<md-icon md-svg-icon="icons:key" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-subhead1">
+						{{ $ctrl.users[$ctrl.selectedIndex].id }}
+					</div>
+					<div class="pip-subtitle color-secondary-text">
+						{{::'USER_ID' | translate}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<iqs-user-sessions-panel class="pip-ref-list lp0 rp0 w-stretch" ng-if="$ctrl.section == 1" iqs-change="$ctrl.currentStateFunc"
+		                                         iqs-user="$ctrl.users[$ctrl.selectedIndex]">
+		</iqs-user-sessions-panel>
+		<iqs-user-activities-panel class="pip-ref-list lp0 rp0 w-stretch" ng-if="$ctrl.section == 2"
+		                                           iqs-change="$ctrl.currentStateFunc" iqs-pre-loading="$ctrl.isPreLoading" iqs-user="$ctrl.users[$ctrl.selectedIndex]">
+		</iqs-user-activities-panel>
+
+	</div>
+	<div class="pip-footer " style="height: 86px" ng-if="$ctrl.state() == 'data' && $ctrl.section == 0 && !$ctrl.isPreLoading">
+		<div class="pip-action-list w-stretch">
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.addUser" ng-click="$ctrl.changeEdit($ctrl.users[$ctrl.selectedIndex].id)"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:pen"></md-icon>
+				<div class="pip-title">{{::'EDIT' | translate}}</div>
+			</md-button>
+
+			<md-button class="pip-action-list-item" xxxng-if="$ctrl.accessConfig.deleteUser" ng-click="$ctrl.delete($ctrl.users[$ctrl.selectedIndex].id)"
+			           ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.deleteUser">
+
+				<md-icon class="pip-pic" md-svg-icon="icons:trash"></md-icon>
+				<div class="pip-title">{{::'ACCOUTNT_DELETE' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+</pip-document>

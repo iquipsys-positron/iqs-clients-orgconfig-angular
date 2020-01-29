@@ -1,0 +1,105 @@
+<div class="tp24 layout-column flex">
+    <form name="mapForm">
+        {{this.site.map_south}}
+        <div class="layout-row">
+            <md-input-container class="md-block flex bm0">
+                <label>{{::'GLOBAL_SETTINGS_MAP_1' | translate}}</label>
+                <input ng-model="$ctrl.site.map_north" type="number" ng-change="$ctrl.onChangeCoordinates()"
+                       ng-disabled="$ctrl.transaction.busy()">
+            </md-input-container>
+            <md-input-container class="md-block flex bm0">
+                <label>{{::'GLOBAL_SETTINGS_MAP_2' | translate}}</label>
+                <input ng-model="$ctrl.site.map_south" type="number" ng-change="$ctrl.onChangeCoordinates()"
+                       ng-disabled="$ctrl.transaction.busy()">
+            </md-input-container>
+        </div>
+        <div class="layout-row">
+            <md-input-container class="md-block flex bm0">
+                <label>{{::'GLOBAL_SETTINGS_MAP_3' | translate}}</label>
+                <input ng-model="$ctrl.site.map_west" type="number" ng-change="$ctrl.onChangeCoordinates()" ng-disabled="$ctrl.transaction.busy()">
+            </md-input-container>
+            <md-input-container class="md-block flex bm0">
+                <label>{{::'GLOBAL_SETTINGS_MAP_4' | translate}}</label>
+                <input ng-model="$ctrl.site.map_east" type="number" ng-change="$ctrl.onChangeCoordinates()" ng-disabled="$ctrl.transaction.busy()">
+            </md-input-container>
+        </div>
+    </form>
+    <div class="layout-column flex" style="position: relative; height:100%; min-height: 300px;">
+        <div class="iqs-map-edit-zoom-buttons layout-column">
+            <md-button aria-label="ZoomIn" ng-click="$ctrl.onZoomIn()" class="md-fab md-raised md-mini">
+                <md-tooltip md-visible="showTooltip" md-direction="left">
+                    {{ ::'ZONE_ZOOM_IN' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="icons:plus" aria-label="ZoomIn"></md-icon>
+            </md-button>
+            <md-button aria-label="ZoomOut" ng-click="$ctrl.onZoomOut()" class="md-fab md-raised md-mini">
+                <md-tooltip md-visible="showTooltip" md-direction="left">
+                    {{ ::'ZONE_ZOOM_OUT' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="icons:minus" aria-label="ZoomOut"></md-icon>
+            </md-button>
+        </div>
+        <div class="iqs-map-edit-overlay-buttons layout-column">
+            <md-button aria-label="PAN" ng-click="$ctrl.selectSection(0)" ng-class="{'md-accent': $ctrl.section === 0 }"
+                       class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+                <md-tooltip md-visible="showTooltip" md-direction="right">
+                    {{ 'ZONE_EMBEDED_PAN' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="iqs:draw-pan" aria-label="Pan"></md-icon>
+            </md-button>
+            <md-button aria-label="DrawRectangle" ng-click="$ctrl.selectSection(1)" ng-class="{'md-accent': $ctrl.section === 1 }"
+                       ng-disabled="$ctrl.transaction.busy()" class="md-fab md-raised md-mini">
+                <md-tooltip md-visible="showTooltip" md-direction="right">
+                    {{ 'ADD_RECTANGLE' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="icons:pen" aria-label="DrawRectangle"></md-icon>
+            </md-button>
+        </div>
+        <div class="iqs-map-edit-clear-buttons layout-column">
+            <md-button iqs-test-tool-clear aria-label="ClearMap" ng-disabled="$ctrl.transaction.busy()" ng-click="$ctrl.isEmbededMap()"
+                       class="md-fab md-raised md-mini" ng-if="$ctrl.site.map_id">
+                <md-tooltip md-visible="showTooltip" md-direction="right">
+                    <span ng-if="$ctrl.isShowMap">
+                        {{ ::'ZONE_HIDE_EMBEDED_MAP' | translate }}
+                    </span>
+                    <span ng-if="!$ctrl.isShowMap">
+                        {{ ::'ZONE_SHOW_EMBEDED_MAP' | translate }}
+                    </span>
+                </md-tooltip>
+                <md-icon md-svg-icon="iqs:hide-embeded" aria-label="HideMap" ng-if="$ctrl.isShowMap"></md-icon>
+                <md-icon md-svg-icon="iqs:show-embeded" aria-label="ShowMap" ng-if="!$ctrl.isShowMap"></md-icon>
+            </md-button>
+            <md-button aria-label="ClearMap" ng-click="$ctrl.clearMap()" class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+                <md-tooltip md-visible="showTooltip" md-direction="right">
+                    {{ 'ZONE_CLEAR_MAP' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="iqs:draw-clear" aria-label="ClearMap"></md-icon>
+            </md-button>
+        </div>
+
+        <div class="iqs-map-edit-center-buttons layout-column">
+            <md-button iqs-test-tool-center aria-label="CENTER" ng-click="$ctrl.toCenter()" class="md-fab md-raised md-mini">
+                <md-tooltip md-visible="showTooltip" md-direction="right">
+                    {{ ::'ZONE_TO_CENTER' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-icon="icons:target" aria-label="CENTER"></md-icon>
+            </md-button>
+        </div>
+
+        <pip-map-edit pip-show-action-panel="false" pip-overlay="$ctrl.overlay" pip-on-edit="$ctrl.onEdit(bounds)"
+                      pip-map-options="$ctrl.mapOptions" ng-if="$ctrl.mapOptions && !$ctrl.startPause" pip-control="$ctrl.setControl(control)">
+
+
+        </pip-map-edit>
+    </div>
+</div>
+<div class="pip-footer layout-row layout-align-end-center p0 tp24 bp24">
+    <md-button class="md-raised m0 rm16 lp24 rp24" ng-disabled="$ctrl.transaction.busy() || $ctrl.form.$invalid"
+               ng-click="$ctrl.onDelete()">
+        {{ ::'GLOBAL_SETTINGS_MAP_DELETE' | translate }}
+    </md-button>
+    <md-button class="md-raised m0 lp24 rp24" ng-disabled="$ctrl.transaction.busy() || $ctrl.form.$invalid" accept="image/*"
+               ng-multiple="false" ng-file-select ng-file-change="$ctrl.onLoad($files)">
+        {{ ::'GLOBAL_SETTINGS_MAP_LOAD' | translate }}
+    </md-button>
+</div>

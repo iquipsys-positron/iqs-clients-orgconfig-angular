@@ -1,0 +1,94 @@
+<div class="tp24 bp24 layout-column">
+	<form name="locationForm">
+		<md-input-container class="md-block flex-fixed bm0">
+			<label>{{::'GLOBAL_SETTINGS_LOCATION_LONGITUDE' | translate}}</label>
+			<input ng-model="$ctrl.site.center.coordinates[0]" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex-fixed bm0">
+			<label>{{::'GLOBAL_SETTINGS_LOCATION_LATTITUDE' | translate}}</label>
+			<input ng-model="$ctrl.site.center.coordinates[1]" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block flex-fixed bm0">
+			<label>{{::'GLOBAL_SETTINGS_LOCATION_DISTANSE' | translate}}</label>
+			<input ng-model="$ctrl.site.radius" type="number" ng-disabled="$ctrl.transaction.busy()">
+		</md-input-container>
+
+		<md-input-container class="md-block">
+			<label>{{::'LANGUAGE' | translate}}</label>
+			<md-select placeholder="{{'LANGUAGE' | translate}}" ng-disabled="$ctrl.transaction.busy()" ng-model="$ctrl.site.language"
+			           ng-change="$ctrl.onChangeOrganization()">
+				<md-option ng-value="language.id" ng-repeat="language in $ctrl.languages track by $index">
+					{{ language.name }}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<md-input-container class="md-block flex-fixed bm8">
+			<label>{{::'GLOBAL_SETTINGS_LOCATION_TIMEZONE'| translate}}</label>
+			<md-select ng-model="$ctrl.site.timezone" ng-change="$ctrl.onChangeOrganization()" ng-disabled="$ctrl.transaction.busy()">
+				<md-option ng-repeat="obj in $ctrl.zones track by $index" ng-value="obj.name">
+					{{ ::obj.title }}
+				</md-option>
+			</md-select>
+		</md-input-container>
+
+		<div class="flex" style="position: relative; min-height: 400px">
+			<pip-map-edit ng-if="$ctrl.mapOptions && !$ctrl.startPause" pip-on-edit="$ctrl.debouncedOnEdit(overlay, type, path, center, radius)"
+			              pip-show-action-panel="false" pip-overlay="$ctrl.siteOverlay" pip-map-options="$ctrl.mapOptions"
+			              pip-control="$ctrl.setControl(control)">
+			</pip-map-edit>
+
+			<div class="iqs-map-edit-zoom-buttons layout-column">
+				<md-button aria-label="ZoomIn" ng-click="$ctrl.onZoomIn()" class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+					<md-tooltip md-visible="showTooltip" md-direction="left">
+						{{ ::'ZONE_ZOOM_IN' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="icons:plus" aria-label="ZoomIn"></md-icon>
+				</md-button>
+				<md-button aria-label="ZoomOut" ng-click="$ctrl.onZoomOut()" class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+					<md-tooltip md-visible="showTooltip" md-direction="left">
+						{{ ::'ZONE_ZOOM_OUT' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="icons:minus" aria-label="ZoomOut"></md-icon>
+				</md-button>
+			</div>
+
+			<div class="iqs-map-edit-overlay-buttons layout-column">
+				<md-button aria-label="PAN" ng-click="$ctrl.selectSection(0)" ng-class="{'md-accent': $ctrl.section === 0 }" class="md-fab md-raised md-mini"
+				           ng-disabled="$ctrl.transaction.busy()">
+					<md-tooltip md-visible="showTooltip" md-direction="right">
+						{{ 'ZONE_PAN' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="iqs:draw-pan" aria-label="Pan"></md-icon>
+				</md-button>
+				<md-button aria-label="DrawCircle" ng-click="$ctrl.selectSection(1)" ng-class="{'md-accent': $ctrl.section === 1 }"
+				           ng-disabled="$ctrl.transaction.busy()" class="md-fab md-raised md-mini">
+					<md-tooltip md-visible="showTooltip" md-direction="right">
+						{{ 'ADD_CENTER' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="icons:pen" aria-label="DrawCircle"></md-icon>
+				</md-button>
+			</div>
+
+			<div class="iqs-map-edit-clear-buttons layout-column">
+				<md-button aria-label="ClearMap" ng-click="$ctrl.clearMap()" class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+					<md-tooltip md-visible="showTooltip" md-direction="right">
+						{{ 'ZONE_CLEAR_MAP' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="iqs:draw-clear" aria-label="ClearMap"></md-icon>
+				</md-button>
+			</div>
+
+			<div class="iqs-map-edit-center-buttons layout-column" ng-if="$ctrl.mapOptions && $ctrl.site.center.coordinates[0] && $ctrl.site.center.coordinates[1]">
+				<md-button aria-label="ClearMap" ng-click="$ctrl.setOverlay()" class="md-fab md-raised md-mini" ng-disabled="$ctrl.transaction.busy()">
+					<md-tooltip md-visible="showTooltip" md-direction="left">
+						{{ 'REDRAW' | translate }}
+					</md-tooltip>
+					<md-icon md-svg-icon="icons:reload" aria-label="ClearMap"></md-icon>
+				</md-button>
+			</div>
+		</div>
+	</form>
+</div>

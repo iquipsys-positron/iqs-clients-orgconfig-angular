@@ -1,0 +1,55 @@
+<pip-document class="pip-scroll ">
+	<md-progress-linear md-mode="indeterminate" style="position: absolute;" ng-show="$ctrl.transaction.busy()"></md-progress-linear>
+	<div class="pip-body">
+		<div class="pip-ref-item layout-row layout-align-start-center lp16 rp16">
+			<pip-avatar pip-id="$ctrl.account.id" pip-rebind="true" pip-name="$ctrl.account.name" class="pip-face-md rm16"></pip-avatar>
+			<div class="pip-content">
+				<p class="pip-title text-subhead">{{ $ctrl.account.name }}</p>
+				<p class="pip-subtitle">
+					{{ ::'SETTINGS_BASIC_INFO_FROM' | translate }} {{ $ctrl.account.create_time | formatLongDate }}</p>
+			</div>
+		</div>
+
+		<div class="pip-ref-list lp16 rp16 flex w-stretch">
+
+			<div class="layout-row layout-align-start-center iqs-inform-panel pip-ref-list-item tm8" ng-if="$ctrl.account.login">
+				<md-icon md-svg-icon="icons:message" class="iqs-icon lm0 rm16"></md-icon>
+				<div class="pip-content tp8 bp8">
+					<div class="text-body">
+						{{$ctrl.account.login}}
+					</div>
+					<div class="pip-subtitle">
+						{{::'SETTING_SYSTEM_ACCOUNTS_INVITE_EMAIL' | translate}}
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="lp16 rp16 tp8 bp16 color-secondary-text">
+			{{::'SETTING_SYSTEM_ACCOUNTS_ROLE' | translate}}
+		</div>
+
+		<md-radio-group ng-model="$ctrl.account.role" class="md-primary lp16 rp16" style="display: block">
+			<md-radio-button ng-repeat="d in $ctrl.roleItems track by $index" ng-value="d.title" ng-disabled="$ctrl.transaction.busy()  || !$ctrl.accessConfig.addUser">
+				{{ d.title | translate }}<br />
+				<span class="ipsum color-secondary-text">
+					{{ d.subtitle | translate }}
+				</span>
+			</md-radio-button>
+		</md-radio-group>
+	</div>
+
+	<div class="pip-footer " style="height: 86px">
+		<div class="pip-action-list w-stretch">
+			<md-button class="pip-action-list-item" ng-click="$ctrl.saveClick()" ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+				<md-icon class="pip-pic" md-svg-icon="icons:check"></md-icon>
+				<div class="pip-title">{{::'SAVE' | translate }}</div>
+			</md-button>
+			<md-button class="pip-action-list-item" ng-click="$ctrl.cancelClick()" ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addUser">
+				<md-icon class="pip-pic" md-svg-icon="icons:cross"></md-icon>
+				<div class="pip-title">{{::'CANCEL' | translate}}</div>
+			</md-button>
+		</div>
+	</div>
+</pip-document>

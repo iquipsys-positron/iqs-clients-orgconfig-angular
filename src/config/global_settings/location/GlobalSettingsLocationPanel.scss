@@ -1,0 +1,22 @@
+iqs-global-settings-location-panel {
+    .iqs-map-edit-zoom-buttons {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+    }
+    .iqs-map-edit-overlay-buttons {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+    }
+    .iqs-map-edit-clear-buttons {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+    }
+    .iqs-map-edit-center-buttons {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+    }
+}

@@ -1,0 +1,64 @@
+<md-progress-linear ng-show="$ctrl.transaction.busy()" md-mode="indeterminate" class="pip-progress-top">
+</md-progress-linear>
+<div ng-if="$ctrl.state == 'data'" class="w-stretch">
+	<md-list class="w-stretch">
+		<div ng-repeat="session in $ctrl.sessions track by $index">
+			<div class="layout-row lp16 rp16" ng-init="showBlock = session.id != $ctrl.sessionId" ng-click="showBlock = !showBlock">
+				<p class="m0 text-subhead2 text-overflow max-w50-stretch">
+					{{::session.client}}
+				</p>
+				<p class="m0 lp4 text-body1 color-secondary-text flex" ng-if="!session.active">
+					{{::'SETTINGS_ACTIVE_SESSION_INACTIVE' | translate}}
+				</p>
+				<p class="m0 lp4 text-body1 color-secondary-text flex" ng-if="session.active">
+					{{::'SETTINGS_ACTIVE_SESSION_ACTIVE' | translate}}
+				</p>
+				<p class="m0 text-body1 color-secondary-text">
+					{{::session.country}}
+					<md-icon ng-if="showBlock" md-svg-icon="icons:triangle-up"></md-icon>
+					<md-icon ng-if="!showBlock" md-svg-icon="icons:triangle-down"></md-icon>
+				</p>
+			</div>
+			<div class="layout-row bm8 bp8 lp16 rp16" ng-class="{'divider-bottom':!$last}">
+				<div class="flex-50">
+					<p class="m0 bm4 text-body1 text-overflow color-secondary-text ">
+						{{session.request_time | date : 'medium'}}
+					</p>
+					<p class="m0 bm4 text-body1 text-overflow color-secondary-text" ng-if="session.platform" ng-show="showBlock">
+						{{::'SETTINGS_ACTIVE_SESSION_OS' | translate}}{{::session.platform}}</p>
+					<p class="m0 bm4 text-body1 text-overflow color-secondary-text" ng-show="showBlock">
+						{{::'SETTINGS_ACTIVE_SESSION_IP' | translate}}{{::session.address}}
+					</p>
+					<md-button class="md-raised" ng-show="showBlock && session.id != $ctrl.sessionId" ng-if="session.active" ng-click="$ctrl.onRemove(session)"
+					           ng-disabled="!$ctrl.accessConfig.closeSession">
+						{{::'SETTINGS_ACTIVE_SESSIONS_CLOSE_SESSION' | translate}}
+					</md-button>
+				</div>
+				<!--<pip-location-ip class="map-edit flex-50" ng-if="showBlock" pip-ipaddress="session.address" pip-extra-info="country = extraInfo.country">
+            </pip-location-ip>-->
+			</div>
+
+		</div>
+	</md-list>
+	<div class="layout-row layout-align-end-center">
+		<md-button class="md-raised" ng-show="$ctrl.sessions.length > 1" ng-click="$ctrl.onRemoveAll()" ng-disabled="!$ctrl.accessConfig.closeSession">
+			{{::'SETTINGS_ACTIVE_SESSIONS_CLOSE_ACTIVE_SESSIONS' | translate}}
+		</md-button>
+	</div>
+</div>
+<div class="layout-column layout-align-center-center flex bb-empty w-stretch" ng-if="$ctrl.state != 'data'">
+	<div class="pip-empty" ng-if="$ctrl.state == 'empty'">
+		<img src="images/empty/empty.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'USER_SESSIONS_EMPTY' | translate}}
+		</div>
+	</div>
+
+	<div class="pip-empty" ng-if="$ctrl.state == 'progress'">
+		<img src="images/empty/progress.svg" class="pip-pic">
+		<div class="pip-text">
+			{{:: 'LOADING_PROGRESS_USER_SESSIONS' | translate}}
+			<md-progress-linear md-mode="indeterminate" class="tm24"></md-progress-linear>
+		</div>
+	</div>
+</div>

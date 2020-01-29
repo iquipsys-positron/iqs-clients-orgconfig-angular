@@ -1,0 +1,14 @@
+<div ng-if="$ctrl.edit == 'data' && $ctrl.users[$ctrl.selectedIndex].localType == 'user' && !($ctrl.state() == 'empty' || $ctrl.state() == 'progress' || $ctrl.isPreLoading)"
+     class="pip-content-container" ng-include="'config/users/panels/UsersDetailsUser.html'"></div>
+<div ng-if="$ctrl.edit == 'data' && $ctrl.users[$ctrl.selectedIndex].localType == 'invite' && !($ctrl.state() == 'empty' || $ctrl.state() == 'progress' || $ctrl.isPreLoading)"
+     class="pip-content-container" ng-include="'config/users/panels/UsersDetailsInivite.html'"></div>
+<pip-document ng-if="$ctrl.state() == 'empty' || $ctrl.state() == 'progress' || $ctrl.isPreLoading" class="pip-scroll ">
+	<div class="pip-body rp0 layout-column layout-align-center-center flex " ng-include="'config/users/panels/UsersEmpty.html'">
+	</div>
+</pip-document>
+
+<iqs-user-edit-panel ng-if="$ctrl.edit == 'edit' && !$ctrl.isPreLoading" iqs-change="$ctrl.currentStateEditFunc" iqs-edit="$ctrl.edit"
+                                     iqs-user="$ctrl.users[$ctrl.selectedIndex]">
+</iqs-user-edit-panel>
+<iqs-user-invite-panel ng-if="$ctrl.edit == 'add' && !$ctrl.isPreLoading" iqs-change="$ctrl.currentStateFunc" iqs-edit="$ctrl.edit">
+</iqs-user-invite-panel>

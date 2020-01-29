@@ -1,0 +1,32 @@
+<div class="pip-main-menu" ng-class="{'pip-single-content': $ctrl.details}">
+	<div class="pip-menu iqs-menu ">
+		<div class="pip-list-container pip-scroll">
+			<md-list class="pip-ref-list tp0 " pip-selected="$ctrl.selectedIndex()" pip-select="$ctrl.selectItem($event.index)">
+				<md-list-item class="pip-ref-list-item pointer iqs-config-small-list" ng-class="{'selected': $ctrl.selectIndex == $index, 'pip-selectable': $ctrl.pipMedia('gt-sm')}"
+				              md-ink-ripple ng-repeat="section in $ctrl.sections track by $index">
+					<div class="pip-face pip-pic tm0 iqs-device-avatar p8 layout-row layout-align-center-center color-primary-bg"
+					     ng-click="$ctrl.selectItem($index)">
+						<md-icon class="" md-svg-icon="{{::section.icon}}"></md-icon>
+					</div>
+					<div class="pip-content" ng-click="$ctrl.selectItem($index)">
+						<p class="text-body2 text-overflow flex">
+							{{::section.title | translate }}
+						</p>
+					</div>
+				</md-list-item>
+			</md-list>
+		</div>
+		<div class="pip-list-container bb-menu-empty" ng-if="$ctrl.state() == 'empty' || $ctrl.state() == 'progress'">
+		</div>
+
+	</div>
+	<div class="pip-content-container">
+		<pip-document class="pip-scroll ">
+
+			<div class="pip-body p0 lp24 rp24 layout-column flex" ui-view>
+
+			</div>
+
+		</pip-document>
+	</div>
+</div>

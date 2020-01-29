@@ -1,0 +1,27 @@
+<div class="pip-body layout-column layout-align-center-center flex pip-empty">
+	<div class="pip-empty" ng-if="$ctrl.state() != 'progress' && !$ctrl.isPreLoading">
+		<img src="images/empty/empty.svg" class="pip-pic">
+		<div class="pip-text">
+			{{::'SHIFTS_EMPTY' | translate}}
+		</div>
+		<div class="pip-text tm8">
+			{{::'SHIFTS_EMPTY1' | translate}}
+		</div>
+		<div class="pip-actions layout-row layout-align-end-center">
+			<md-button iqs-test-add class="color-accent-bg tm12 flex" aria-label="Add" xxxng-if="$ctrl.accessConfig.addShift"
+			           ng-click="$ctrl.addClick()" ng-disabled="$ctrl.transaction.busy() || !$ctrl.accessConfig.addShift">
+
+				{{::'ADD_SHIFT' | translate}}
+			</md-button>
+		</div>
+	</div>
+
+	<div class="pip-empty" ng-if="$ctrl.state() == 'progress' || $ctrl.isPreLoading">
+		<img src="images/empty/progress.svg" class="pip-pic">
+		<div class="pip-text">
+
+			{{:: 'LOADING_SHIFTS' | translate }}
+			<md-progress-linear md-mode="indeterminate" class="tm24"></md-progress-linear>
+		</div>
+	</div>
+</div>

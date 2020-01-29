@@ -1,0 +1,21 @@
+<div class="layout-row layout-align-start-center bp8">
+    <div class="text-subhead2 flex">
+        {{ $ctrl.fliterParams.deviceId ? 'STATISTICS_BY_DEVICE' : 'STATISTICS_BY_ALL_DEVICES' | translate }}
+        {{ $ctrl.fliterParams.deviceId ? ('"' + $ctrl.fliterParams.device.label || $ctrl.fliterParams.device.udi + '"')
+        : '' }}
+        {{ $ctrl.dateType === 'weekly' ? 'FOR_DATE_WEEK' : 'FOR_DATE' | translate }} {{
+        $ctrl.filterParams.formattedDate }}
+    </div>
+    <div class="flex-fixed">
+        <md-button class="md-icon-button" ng-click="$ctrl.view = 'chart'" ng-class="{ 'opacity-secondary' :  $ctrl.view === 'grid'}">
+            <md-icon md-svg-icon="icons:bars"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="$ctrl.view = 'grid'" ng-class="{ 'opacity-secondary' :  $ctrl.view === 'chart'}">
+            <md-icon md-svg-icon="icons:grid"></md-icon>
+        </md-button>
+    </div>
+</div>
+
+<div ng-include="'config/usage_statistics/includes/StatisticsLineChart.html'" ng-if="$ctrl.view === 'chart'"></div>
+
+<div ng-include="'config/usage_statistics/includes/StatisticsGridForSpecificParam.html'" class="bp16" ng-if="$ctrl.view === 'grid'"></div>
