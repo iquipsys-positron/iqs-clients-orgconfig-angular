@@ -59,12 +59,12 @@ class GlobalSettingsMapPanelController implements ng.IController {
 
         this.transaction = pipTransaction.create('sites');
         const runWhenReady = () => {
-            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.site.id));
+            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.organization.id));
             this.iqsMapViewModel.map.init(() => { });
             this.zoomLevel = 11;
 
             this.$timeout(() => {
-                this.siteCenter = [angular.extend(this.iqsMapConfig.siteCenter, { id: 0 })];
+                this.siteCenter = [angular.extend(this.iqsMapConfig.organizationCenter, { id: 0 })];
                 this.onUpdateMapConfig();
                 this.startPause = false;
             }, 1000);
@@ -163,7 +163,7 @@ class GlobalSettingsMapPanelController implements ng.IController {
         let center = _.cloneDeep(this.site.center);
 
         if (!this.mapOptions) {
-            this.mapOptions = angular.extend(_.cloneDeep(this.iqsMapConfig.siteConfigs), {
+            this.mapOptions = angular.extend(_.cloneDeep(this.iqsMapConfig.organizationConfigs), {
                 center: {
                     latitude: center.coordinates[1],
                     longitude: center.coordinates[0]

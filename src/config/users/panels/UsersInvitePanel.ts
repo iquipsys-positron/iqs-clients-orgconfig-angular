@@ -224,7 +224,7 @@ class ConfigUserInvitePanelController implements ng.IController {
         invitation.invitee_email = this.account.login;
         invitation.org_id = this.iqsOrganization.orgId;
         invitation.language = this.pipIdentity.identity.user.language;
-        invitation.site_name = this.iqsOrganization.site.name;
+        invitation.organization_name = this.iqsOrganization.organization.name;
         invitation.role = this.role;
         invitation.action = iqs.shell.InvitationAction.Activate;
 

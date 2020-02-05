@@ -59,7 +59,7 @@ class GlobalSettingsLocationPanelController implements ng.IController {
         const runWhenReady = () => {
             this.languages = pipTranslate.translateSet(['ru', 'en'], null, null);
             // todo: if site not found?
-            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.site.id));
+            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.organization.id));
             if (this.site && !this.site.language) {
                 this.site.language = this.pipTranslate.language;
                 this.updateOrganization();

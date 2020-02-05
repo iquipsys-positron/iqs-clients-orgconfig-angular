@@ -43,7 +43,7 @@ class GlobalSettingsParametrsPanelController implements ng.IController {
 
         this.transaction = pipTransaction.create('sites');
         const runWhenReady = () => {
-            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.site.id));
+            this.site = _.cloneDeep(this.iqsOrganizationsViewModel.getOrganizationById(this.iqsOrganization.organization.id));
             this.onChangeOrganization = this.updateOrganization;
         };
 
