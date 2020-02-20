@@ -176,7 +176,12 @@ function configureConfigUsersAccess(
 (() => {
 
     angular
-        .module('iqsConfigUsers', ['pipNav', 'iqsConfigUsersPanel', 'iqsConfigUserSessionsPanel'])
+        .module('iqsConfigUsers', [
+            'pipNav', 'iqsAccounts.ViewModel', 'iqsInvitations.ViewModel',
+            'iqsAccessConfig',
+            'iqsConfigUsersPanel',
+            'iqsConfigUserSessionsPanel'
+        ])
         .config(configureConfigUsersRoute)
         .config(configureConfigUsersAccess);
 

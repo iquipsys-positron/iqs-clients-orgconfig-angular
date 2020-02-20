@@ -77,7 +77,7 @@ function configureConfigUsageStatisticsAccess(
 (() => {
 
     angular
-        .module('iqsConfigUsageStatistics', ['pipNav', 'iqsSettingsUsageStatisticsPanel'])
+        .module('iqsConfigUsageStatistics', ['pipNav', 'iqsStatistics.ViewModel', 'iqsAccessConfig', 'iqsSettingsUsageStatisticsPanel'])
         .config(configureConfigUsageStatisticsRoute)
         .config(configureConfigUsageStatisticsAccess);
 

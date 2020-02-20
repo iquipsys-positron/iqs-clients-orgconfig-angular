@@ -175,7 +175,7 @@ function configureConfigShiftsAccess(
 (() => {
 
     angular
-        .module('iqsConfigShifts', ['pipNav', 'iqsConfigShiftsPanel'])
+        .module('iqsConfigShifts', ['pipNav', 'iqsShifts.ViewModel', 'iqsAccessConfig', 'iqsConfigShiftsPanel'])
         .config(configureConfigShiftsRoute)
         .config(configureConfigShiftsAccess);
 

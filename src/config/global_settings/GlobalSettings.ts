@@ -200,6 +200,8 @@ function configureConfigGlobalSettingsAccess(
 
     angular
         .module('iqsConfigGlobalSettings', ['pipNav',
+            'iqsAccessConfig',
+            'iqsOrganizations', 'iqsCreditCards',
             'iqsGlobalSettings.Map', 'iqsGlobalSettingsMapPanel',
             'iqsGlobalSettings.Organization', 'iqsGlobalSettingsOrganizationPanel',
             'iqsGlobalSettings.Location', 'iqsGlobalSettingsLocationPanel',
