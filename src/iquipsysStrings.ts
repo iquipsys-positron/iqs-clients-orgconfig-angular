@@ -28,7 +28,8 @@
             MAP_STATUS_OBJECT_ONLINE: 'online',
             ACTION_SEND_SIGNAL: 'Send signal',
             ERROR_DISMISS: 'Close',
-            DETAILS: 'Details'
+            DETAILS: 'Details',
+            ORGANIZATIONS_CREATE_INVITE_PEOPLE_PLACEHOLDER: 'User name or e-mail address',
 
         });
         pipTranslateProvider.translations('ru', {
@@ -58,7 +59,8 @@
             MAP_STATUS_OBJECT_ONLINE: 'на связи',
             ACTION_SEND_SIGNAL: 'Послать сигнал',
             ERROR_DISMISS: 'Закрыть',
-            DETAILS: 'Подробности'
+            DETAILS: 'Подробности',
+            ORGANIZATIONS_CREATE_INVITE_PEOPLE_PLACEHOLDER: 'Имя пользователя или адрес электронной почты',
 
         });
     }
